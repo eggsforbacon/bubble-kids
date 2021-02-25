@@ -1,11 +1,9 @@
 package model;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Sorting {
 
@@ -51,7 +49,18 @@ public class Sorting {
         }
     }
 
-    public ArrayList<ArrayList<Double>> getLineByLine() {
-        return lineByLine;
+    public String asString() {
+        StringBuilder output = new StringBuilder();
+        for (ArrayList<Double> doubles: lineByLine) {
+            output.append(doubles.get(0));
+            output.append("-");
+            for (double d: doubles) {
+                output.append(d).append(" ");
+            }
+            output.deleteCharAt(output.length() - 1);
+            output.append("\n");
+        }
+        output.append("-------------------------------------------------------------").append("\n$>: Test cases: ").append(testCases);
+        return output.toString();
     }
 }

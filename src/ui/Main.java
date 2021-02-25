@@ -19,6 +19,8 @@ public class Main {
         System.out.println("$>: Input is being read... ");
         sorter.bubbleSort();
         System.out.println("$>: Input sorted!");
+        System.out.println("$:> Printing output...");
+        System.out.println(sorter.asString());
 
     }
 
