@@ -17,6 +17,8 @@ public class Main {
                 " >: Incorrect file names may lead to unexpected errors: ");
         sorter.load(in.readLine());
         System.out.println("$>: Input is being read... ");
+        sorter.bubbleSort();
+        System.out.println("$>: Input sorted!");
 
     }
 

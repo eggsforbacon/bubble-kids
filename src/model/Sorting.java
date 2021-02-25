@@ -5,33 +5,53 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Sorting {
 
-    ArrayList<ArrayList<Integer>> lineByLine = new ArrayList<>(); //[elements],[meanOfSorts]
-    private int testCases;
+    ArrayList<ArrayList<Double>> lineByLine = new ArrayList<>(); //[elements],[meanOfSorts]
+    private String testCases;
 
-    private void setLines(String[] splitInput) {
-
-    }
-
-    private void setMean() {
-
+    private double setMean(double sum, int data) {
+        return sum / data;
     }
 
     public void load(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/data/" + fileName));
-        testCases = br.read();
+        testCases = br.readLine();
         String line = br.readLine();
         while(line!=null){
             String[] parts = line.split(" ");
-
+            ArrayList<Double> lineAL = new ArrayList<>();
+            for (String s: parts) {
+                lineAL.add(Double.parseDouble(s));
+            }
+            lineByLine.add(lineAL);
             line = br.readLine();
         }
         br.close();
     }
 
-    public ArrayList<ArrayList<Integer>> getLineByLine() {
+    public void bubbleSort() {
+        for (ArrayList<Double> doubles : lineByLine) {
+            double sum = 0;
+            int time = 0;
+            for (int i = 1; i < doubles.size(); i++) {
+                time++;
+                for (int j = 0; j < doubles.size() - i; j++) {
+                    if (doubles.get(j) > doubles.get(j + 1)) {
+                        double temp = doubles.get(j);
+                        doubles.set(j, doubles.get(j + 1));
+                        doubles.set(j + 1, temp);
+                        sum++;
+                    }
+                }
+            }
+            doubles.add(0, setMean(sum, time));
+        }
+    }
+
+    public ArrayList<ArrayList<Double>> getLineByLine() {
         return lineByLine;
     }
 }
