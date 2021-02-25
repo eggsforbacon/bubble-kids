@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -53,15 +54,18 @@ public class Sorting {
     public String asString() {
         StringBuilder output = new StringBuilder();
         DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.DOWN);
         for (ArrayList<Double> doubles: lineByLine) {
-            output.append(df.format(doubles.get(0)));
+            if (doubles.get(0).toString().length() > 4) output.append(df.format(doubles.get(0)));
+            else output.append(doubles.get(0));
             output.append("-");
             for (int i = 1, doublesSize = doubles.size(); i < doublesSize; i++) {
                 double d = doubles.get(i);
-                output.append(df.format(d)).append(" ");
+                if (doubles.get(i).toString().length() > 3) output.append(df.format(d)).append(" ");
+                else output.append(d).append(" ");
             }
             output.deleteCharAt(output.length() - 1);
-            output.append("\n----------------------------------------------------------------------\n");
+            output.append("\n");
         }
         output.append("-------------------------------------------------------------").append("\n$>: Test cases: ").append(testCases);
         return output.toString();
